@@ -72,5 +72,18 @@ function game() {
     requestAnimationFrame(game);
 }
 
+// Mouse control for player paddle
+canvas.addEventListener("mousemove", movePaddle);
+
+function movePaddle(event) {
+    const rect = canvas.getBoundingClientRect();
+    player.y = event.clientY - rect.top - player.height / 2;
+
+    // Prevent paddle from going outside canvas
+    if (player.y < 0) player.y = 0;
+    if (player.y + player.height > canvas.height)
+        player.y = canvas.height - player.height;
+}
+
 // Start the game
 game();
